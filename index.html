@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         #map {
-            height: 500px;
+            height: 600px;
             width: 100%;
         }
     </style>
@@ -19,7 +19,7 @@
 
     <script>
         const jsonUrl = 'https://script.google.com/macros/s/AKfycbzya2qE3JkSS-LFYE4zOqAvjKwzaudFnRSH2QeFNNviG7NSFx-ZqG1EvOGH7ChMndO1UA/exec'; // Substitua pela URL do seu endpoint
-        const map = L.map('map').setView([-22.833664, -47.048420], 15); // Mapa inicial
+        const map = L.map('map').setView([-22.833664, -47.048420], 13); // Mapa inicial
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 25,
         }).addTo(map);
@@ -44,7 +44,7 @@
         fetchLocation(); // Busca a primeira vez
 
         // Atualiza a cada 5 segundos (5000 ms)
-        setInterval(fetchLocation, 5000);
+        setInterval(fetchLocation, 2000);
     </script>
 </body>
 </html>
