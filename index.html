@@ -22,7 +22,7 @@
         }).addTo(map);
 
         // Marcador inicial
-        let marker = L.marker([-23.5505, -46.6333]).addTo(map);
+        let marker = L.marker([-22.833400, -47.052303]).addTo(map);//-22.833400 -47.052303 PUC
 
         // Função para atualizar a posição do marcador
         function updateMarker(lat, long) {
@@ -33,8 +33,8 @@
         // Simulação de atualização de posição (substitua por chamada do servidor)
         setInterval(() => {
             // Aqui você deve pegar a nova posição do servidor
-            const newLat = -23.5605;
-            const newLong = -46.6433;
+            const newLat = -22.832400;
+            const newLong = -47.052203;
             updateMarker(newLat, newLong);
         }, 5000); // Atualiza a cada 5 segundos
     </script>
