@@ -14,11 +14,11 @@
     <div id="map"></div>
     <script>
         // Inicializar o mapa
-        var map = L.map('map').setView([0, 0], 13);
+        var map = L.map('map').setView([-22.833400, -47.052303], 10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19
+            maxZoom: 9
         }).addTo(map);
-        var marker = L.marker([0, 0]).addTo(map);
+        var marker = L.marker([-22.833400, -47.052303]).addTo(map);
 
         // URL do CSV publicado
         const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQp1KFxGyfWarDq--8hcC-o6K5o5LHcjSuhQFybN_kNCix-HpTDN1d8k-BjdAEDONly8-wHoa8pTuoh/gviz/tq?tqx=out:csv&sheet=Sheet1';
@@ -33,7 +33,7 @@
                 if (!isNaN(latitude) && !isNaN(longitude)) {
                     // Atualizar o marcador e o mapa
                     marker.setLatLng([latitude, longitude]);
-                    map.setView([latitude, longitude], 13);
+                    //map.setView([latitude, longitude], 13);
                 } else {
                     console.error("Dados inválidos: ", latitude, longitude);
                 }
