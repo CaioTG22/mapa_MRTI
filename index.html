@@ -19,9 +19,9 @@
 
     <script>
         const jsonUrl = 'https://script.google.com/macros/s/AKfycbzya2qE3JkSS-LFYE4zOqAvjKwzaudFnRSH2QeFNNviG7NSFx-ZqG1EvOGH7ChMndO1UA/exec'; // Substitua pela URL do seu endpoint
-        const map = L.map('map').setView([0, 0], 2); // Mapa inicial
+        const map = L.map('map').setView([-22.833664, -47.048420], 19); // Mapa inicial
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
+            maxZoom: 25,
         }).addTo(map);
 
         async function fetchLocation() {
@@ -36,7 +36,7 @@
                 } else {
                     marker = L.marker([latitude, longitude]).addTo(map);
                 }
-                map.setView([latitude, longitude], 15); // Centraliza o mapa na nova posição
+                //map.setView([latitude, longitude], 15); // Centraliza o mapa na nova posição
             }
         }
 
