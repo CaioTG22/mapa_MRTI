@@ -1,49 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Mapa de Localização</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Localização</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
-        #map { height: 100vh; }
+        #map {
+            height: 500px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
+    <h1>Localização em Tempo Real</h1>
     <div id="map"></div>
+
     <script>
-        // Inicializar o mapa
-        var map = L.map('map').setView([-22.833664, -47.048420], 17);
+        const jsonUrl = 'https://script.google.com/macros/s/AKfycbzya2qE3JkSS-LFYE4zOqAvjKwzaudFnRSH2QeFNNviG7NSFx-ZqG1EvOGH7ChMndO1UA/exec'; // Substitua pela URL do seu endpoint
+        const map = L.map('map').setView([0, 0], 2); // Mapa inicial
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20
+            maxZoom: 19,
         }).addTo(map);
-        var marker = L.marker([-22.833664, -47.048420]).addTo(map);
 
-        // URL do CSV publicado
-        const csvUrl = 'https://docs.google.com/spreadsheets/d/1DvexywRPv3tj3IG1WTdImc6fB18W5QrBcUrlg1jtsRc/gviz/tq?tqx=out:csv&sheet=Sheet1';
+        async function fetchLocation() {
+            const response = await fetch(jsonUrl);
+            const data = await response.json();
+            const [latitude, longitude] = data[0].map(Number); // Supondo que latitude está na primeira coluna e longitude na segunda
 
-        // Função para buscar e processar os dados do CSV
-        async function fetchData() {
-            try {
-                const response = await fetch(csvUrl);
-                const csvData = await response.text();
-                const [latitude, longitude] = csvData.split(',').map(Number); // Ajuste se a estrutura for diferente
-
-                if (!isNaN(latitude) && !isNaN(longitude)) {
-                    // Atualizar o marcador e o mapa
+            // Atualiza a posição do marcador no mapa
+            if (!isNaN(latitude) && !isNaN(longitude)) {
+                if (marker) {
                     marker.setLatLng([latitude, longitude]);
-                    //map.setView([latitude, longitude], 13);
                 } else {
-                    console.error("Dados inválidos: ", latitude, longitude);
+                    marker = L.marker([latitude, longitude]).addTo(map);
                 }
-            } catch (error) {
-                console.error("Erro ao buscar dados do CSV:", error);
+                map.setView([latitude, longitude], 15); // Centraliza o mapa na nova posição
             }
         }
 
-        // Atualizar a cada 5 segundos
-        setInterval(fetchData, 5000);
+        let marker;
+        fetchLocation(); // Busca a primeira vez
+
+        // Atualiza a cada 5 segundos (5000 ms)
+        setInterval(fetchLocation, 5000);
     </script>
 </body>
 </html>
