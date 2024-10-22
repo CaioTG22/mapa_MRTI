@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <title>Mapa de Localização</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -21,7 +21,7 @@
         const jsonUrl = 'https://script.google.com/macros/s/AKfycbzya2qE3JkSS-LFYE4zOqAvjKwzaudFnRSH2QeFNNviG7NSFx-ZqG1EvOGH7ChMndO1UA/exec'; // Substitua pela URL do seu endpoint
         const map = L.map('map').setView([-22.833664, -47.048420], 18); // Mapa inicial
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 25,
+            maxZoom: 20,
         }).addTo(map);
 
         async function fetchLocation() {
@@ -44,7 +44,7 @@
         fetchLocation(); // Busca a primeira vez
 
         // Atualiza a cada 5 segundos (5000 ms)
-        setInterval(fetchLocation, 2000);
+        setInterval(fetchLocation, 5000);
     </script>
 </body>
 </html>
