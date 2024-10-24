@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         #map {
-            height: 600px;
+            height: 800px;
             width: 100%;
         }
     </style>
@@ -16,7 +16,14 @@
 <body>
     <h1>Localização em Tempo Real</h1>
     <div id="map"></div>
-
+ // Criar um ícone personalizado
+        var busIcon = L.icon({
+            iconUrl: 'bus-icon.png', // Caminho da imagem do ícone
+            iconSize: [32, 32], // Tamanho do ícone (ajuste conforme necessário)
+            iconAnchor: [16, 32], // Ponto de ancoragem do ícone (centro inferior)
+            popupAnchor: [0, -32]  // Ponto de ancoragem do popup
+        });
+    
     <script>
         const jsonUrl = 'https://script.google.com/macros/s/AKfycbzya2qE3JkSS-LFYE4zOqAvjKwzaudFnRSH2QeFNNviG7NSFx-ZqG1EvOGH7ChMndO1UA/exec'; // Substitua pela URL do seu endpoint
         const map = L.map('map').setView([-22.833664, -47.048420], 18); // Mapa inicial
@@ -34,9 +41,9 @@
                 if (marker) {
                     marker.setLatLng([latitude, longitude]);
                 } else {
-                    marker = L.marker([latitude, longitude]).addTo(map);
+                    marker = L.marker([latitude, longitude]), { icon: busIcon }).addTo(map).bindPopup('Ônibus em tempo real');
                 }
-                //map.setView([latitude, longitude], 15); // Centraliza o mapa na nova posição
+                map.setView([latitude, longitude], 18); // Centraliza o mapa na nova posição
             }
         }
 
