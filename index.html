@@ -24,6 +24,17 @@
             maxZoom: 20,
         }).addTo(map);
 
+
+        var busStop = L.icon({
+    iconUrl: 'bus-stop.png',
+    iconSize:     [38, 95], // size of the icon
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    //popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+        L.marker([-22.83413270737902, -47.05124294784846], {icon: busStop}).addTo(map);
+        L.marker([-22.832786940312445, -47.049827373275015], {icon: busStop}).addTo(map);
+        
+        
         async function fetchLocation() {
             const response = await fetch(jsonUrl);
             const data = await response.json();
